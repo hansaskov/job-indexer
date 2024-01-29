@@ -3,13 +3,18 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.tsx"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/html": "^0.8.0",
+    "daisyui": "^4.6.1",
+    "elysia": "latest",
+    "elysia-compression": "^0.0.7",
+    "elysia-tailwind": "1.0.9"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "tailwindcss": "^3.4.1"
   },
   "module": "src/index.js"
 }
