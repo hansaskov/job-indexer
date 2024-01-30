@@ -7,12 +7,14 @@ export function Navbar() {
         >
             <div class="navbar">
                 <div class="navbar-start">
-
+                <button class="btn btn-ghost" hx-post="/auth/logout" hx-target="body" hx-boost="false">Logout</button>
+                    
                 </div>
                 <div class="navbar-center">
                     <a class="btn btn-ghost normal-case text-xl" href="/">Job-Matcher</a>
                 </div>
                 <div class="navbar-end">
+                    <a class="btn btn-ghost" href="/auth/login">Login</a>
                     <ThemeController />
                 </div>
             </div>

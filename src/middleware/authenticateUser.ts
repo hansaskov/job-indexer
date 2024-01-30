@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { verifyRequestOrigin } from "lucia";
-import { lucia } from "../libs/auth";
+import { lucia } from "../libs/lucia";
 
 export const authenticateUser = new Elysia()
     .derive(async ({ cookie, request }) => {
@@ -28,33 +28,21 @@ export const authenticateUser = new Elysia()
 
         const { session, user } = await lucia.validateSession(sessionId);
 
+        
         if (session && session.fresh) {
+            
             const sessionCookie = lucia.createSessionCookie(session.id);
 
-            cookie[lucia.sessionCookieName].set({
+            cookie[sessionCookie.name].set({
                 value: sessionCookie.value,
-                domain: sessionCookie.attributes.domain,
-                expires: sessionCookie.attributes.expires,
-                maxAge: sessionCookie.attributes.maxAge,
-                path: sessionCookie.attributes.path,
-                secure: sessionCookie.attributes.secure,
-                httpOnly: sessionCookie.attributes.httpOnly,
-                sameSite: sessionCookie.attributes.sameSite,
                 ...sessionCookie.attributes
             })
         }
 
         if (!session) {
             const sessionCookie = lucia.createBlankSessionCookie();
-            cookie[lucia.sessionCookieName].set({
+            cookie[sessionCookie.name].set({
                 value: sessionCookie.value,
-                domain: sessionCookie.attributes.domain,
-                expires: sessionCookie.attributes.expires,
-                maxAge: sessionCookie.attributes.maxAge,
-                path: sessionCookie.attributes.path,
-                secure: sessionCookie.attributes.secure,
-                httpOnly: sessionCookie.attributes.httpOnly,
-                sameSite: sessionCookie.attributes.sameSite,
                 ...sessionCookie.attributes
             })
         }
