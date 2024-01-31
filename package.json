@@ -14,7 +14,7 @@
     "arctic": "^1.1.0",
     "daisyui": "^4.6.1",
     "drizzle-orm": "^0.29.3",
-    "elysia": "latest",
+    "elysia": "0.8",
     "elysia-tailwind": "1.0.9",
     "lucia": "^3.0.1",
     "oslo": "^1.0.3"

@@ -28,9 +28,9 @@ export const authenticateUser = new Elysia()
 
         const { session, user } = await lucia.validateSession(sessionId);
 
-        
+
         if (session && session.fresh) {
-            
+
             const sessionCookie = lucia.createSessionCookie(session.id);
 
             cookie[sessionCookie.name].set({
@@ -52,3 +52,25 @@ export const authenticateUser = new Elysia()
             session
         }
     })
+
+
+
+
+
+export const authenticatePrivatePage = ({ redirectURL }: { redirectURL: string }) => {
+    return new Elysia()
+        .use(authenticateUser)
+        .onBeforeHandle(({ user, session, set }) => {
+            if (!user || !session) {
+                return (set.redirect = redirectURL)
+            }
+        })
+        .derive(({ user, session }) => {
+            if (user && session) {
+                return { user, session }
+            }
+
+            return {}
+        })
+
+}
